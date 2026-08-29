@@ -819,7 +819,7 @@ async function initLocalizationSystem() {
     currentMarketCode = 'BR';
     const checkoutBtn = document.getElementById('mainCheckoutBtn');
     if (checkoutBtn) {
-      checkoutBtn.href = 'https://pay.hotmart.com/placeholder?country=BR&currency=BRL&price=29.90';
+      checkoutBtn.href = 'https://pay.cakto.com.br/e4th3s6_1070128';
     }
     if (window.dataLayer || window.gtag) {
       const eventPayload = {
