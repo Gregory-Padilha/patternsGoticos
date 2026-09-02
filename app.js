@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Smooth Anchor Scrolling
   initSmoothScroll();
 
+  // 4. Mobile Sticky CTA Bar
+  initMobileStickyCta();
+
   // 5. Ambient Atmospheric Audio (Web Audio API Synthesizer)
   initAmbientSound();
 
@@ -293,6 +296,7 @@ function initGalleryLightbox() {
     document.body.style.position = 'fixed';
     document.body.style.width = '100%';
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('has-modal-open');
 
     // Show modal container and trigger transition on next frame
     modal.style.display = 'flex';
@@ -323,6 +327,7 @@ function initGalleryLightbox() {
       document.body.style.top = '';
       document.body.style.width = '';
       document.body.style.overflow = '';
+      document.body.classList.remove('has-modal-open');
       window.scrollTo(0, savedScrollY);
 
       // Reset content inline transform if any drag was applied
@@ -452,6 +457,42 @@ function initSmoothScroll() {
       }
     });
   });
+}
+
+/* --------------------------------------------------------------------------
+   4. Mobile Sticky CTA Bar
+   -------------------------------------------------------------------------- */
+function initMobileStickyCta() {
+  const stickyBar = document.getElementById('mobileStickyCta');
+  if (!stickyBar) return;
+
+  const heroSection = document.getElementById('hero');
+  const checkoutSection = document.getElementById('checkout-offer');
+
+  const onScroll = () => {
+    if (window.innerWidth > 768) {
+      stickyBar.classList.remove('is-visible');
+      return;
+    }
+
+    const heroBottom = heroSection ? heroSection.getBoundingClientRect().bottom : 300;
+    const checkoutRect = checkoutSection ? checkoutSection.getBoundingClientRect() : null;
+
+    // Show sticky bar once user has scrolled past hero top action card
+    const hasPassedHero = heroBottom < 100;
+    // Hide when user reaches checkout section directly
+    const isAtCheckout = checkoutRect ? (checkoutRect.top < window.innerHeight && checkoutRect.bottom > 0) : false;
+
+    if (hasPassedHero && !isAtCheckout) {
+      stickyBar.classList.add('is-visible');
+    } else {
+      stickyBar.classList.remove('is-visible');
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScroll();
 }
 
 /* --------------------------------------------------------------------------

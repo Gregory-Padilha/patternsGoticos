@@ -3050,4 +3050,289 @@ section {
   }
 }
 
+/* ==========================================================================
+   CONVERSION REFINEMENTS & REFINED SECTIONS (PT-BR)
+   ========================================================================== */
+
+/* Hero Trust Checklist */
+.hero-trust-checklist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px 18px;
+  margin-top: 14px;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.hero-trust-checklist span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+/* 1.5 Mini Stack Section */
+.mini-stack-section {
+  padding: 32px 0 20px 0;
+}
+
+.mini-stack-card {
+  background: linear-gradient(180deg, rgba(24, 14, 38, 0.95) 0%, rgba(13, 8, 20, 0.98) 100%);
+  border: 1px solid rgba(197, 163, 90, 0.4);
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+  box-shadow: var(--shadow-card), inset 0 0 15px rgba(197, 163, 90, 0.05);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mini-stack-header {
+  margin-bottom: 20px;
+}
+
+.mini-stack-title {
+  font-size: clamp(1.35rem, 4vw, 1.85rem);
+  color: #ffffff;
+  margin-top: 4px;
+  letter-spacing: 0.02em;
+}
+
+.mini-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px 16px;
+  max-width: 600px;
+  margin: 0 auto 22px auto;
+  text-align: left;
+}
+
+.mini-stack-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: #f1f5f9;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mini-stack-check {
+  color: var(--gold-antique);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.mini-stack-pricing {
+  border-top: 1px solid rgba(197, 163, 90, 0.2);
+  padding-top: 18px;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.mini-stack-price-label {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.mini-stack-price-amount {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 8vw, 3.2rem);
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(197, 163, 90, 0.25);
+}
+
+.mini-stack-price-type {
+  font-size: 0.82rem;
+  color: var(--gold-antique);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: block;
+  margin: 4px 0 14px 0;
+}
+
+.mini-stack-cta {
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 14px 22px;
+  font-size: 0.98rem;
+}
+
+.mini-stack-microcopy {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+/* Commercial Offer Box inside Bottom Sheet */
+.lightbox-offer-box {
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(197, 163, 90, 0.35);
+  border-radius: var(--radius-sm);
+  padding: 16px 14px;
+  margin-top: 14px;
+  text-align: center;
+  width: 100%;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.lightbox-offer-title {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.03em;
+  margin-bottom: 2px;
+}
+
+.lightbox-offer-subtitle {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+.lightbox-offer-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.lightbox-offer-label {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.lightbox-offer-price {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.lightbox-offer-cta {
+  width: 100%;
+  padding: 12px 16px !important;
+  font-size: 0.88rem !important;
+  margin: 0 auto !important;
+}
+
+.lightbox-offer-microcopy {
+  margin-top: 8px;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+/* Mobile Sticky CTA Bar */
+.mobile-sticky-cta-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-sticky-cta-bar {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 4000; /* Stays below Bottom Sheet z-index 5000 */
+    background: rgba(14, 8, 22, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(197, 163, 90, 0.4);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.8);
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px)) 14px;
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .mobile-sticky-cta-bar.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* When bottom sheet modal is open, ensure sticky bar is pushed away or invisible */
+  body.has-modal-open .mobile-sticky-cta-bar {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(100%) !important;
+  }
+
+  .mobile-sticky-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .mobile-sticky-cta-price-box {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    flex-shrink: 0;
+  }
+
+  .mobile-sticky-cta-prefix {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .mobile-sticky-cta-amount {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.1;
+  }
+
+  .mobile-sticky-cta-btn {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 14px;
+    font-size: 0.88rem;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* Refine Hero Mockup Height on Mobile */
+  .hero-main-img {
+    max-height: 38vh;
+    object-fit: contain;
+  }
+}
+
+
 
