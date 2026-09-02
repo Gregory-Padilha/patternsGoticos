@@ -1162,44 +1162,54 @@
   </section>
 
   <!-- ==========================================================================
-       MODAL LIGHTBOX INTERACTIVO DE PATRÓN
+       MODAL LIGHTBOX / BOTTOM SHEET INTERATIVO DE GRÁFICO
        ========================================================================== -->
-  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.92); backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 20px;">
-    <div class="lightbox-content" style="background: linear-gradient(180deg, #180e26 0%, #0c0814 100%); border: 1px solid var(--gold-antique); border-radius: var(--radius-lg); max-width: 740px; width: 100%; overflow: hidden; position: relative; box-shadow: var(--shadow-museum), var(--glow-gold);">
-      <button class="lightbox-close" id="lightboxClose" aria-label="Fechar modal" style="position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; background: rgba(0,0,0,0.75); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; z-index: 10;">✕</button>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-        <div style="aspect-ratio: 1/1; background: #000; overflow: hidden; padding: 10px;">
-          <img src="" alt="" id="lightboxImg" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: var(--radius-sm); border: 1px solid rgba(197,163,90,0.25);">
-        </div>
-        <div style="padding: 28px 22px; display: flex; flex-direction: column; justify-content: center;">
-          <span class="section-tag" id="lightboxCollection" style="margin-bottom: 8px; font-size: 0.72rem;">Coleção</span>
-          <h3 id="lightboxTitle" style="font-size: 1.45rem; color: #fff; margin-bottom: 8px; font-family: var(--font-serif);">Nome</h3>
-          <p id="lightboxDesc" style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 18px; line-height: 1.45;">Descrição</p>
-          
-          <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 18px; font-size: 0.84rem; display: flex; flex-direction: column; gap: 6px;">
-            <div style="display: flex; justify-content: space-between;">
-              <span style="color: var(--text-dim);">Pontos:</span>
-              <strong id="lightboxStitches" style="color: #fff;"></strong>
-            </div>
-            <div style="display: flex; justify-content: space-between;">
-              <span style="color: var(--text-dim);">Paleta de linhas:</span>
-              <strong id="lightboxColors" style="color: var(--gold-antique);"></strong>
-            </div>
-            <div style="display: flex; justify-content: space-between;">
-              <span style="color: var(--text-dim);">Dificuldade:</span>
-              <strong id="lightboxDiff" style="color: #4ade80;"></strong>
-            </div>
-            <div style="display: flex; justify-content: space-between;">
-              <span style="color: var(--text-dim);">Medida estimada:</span>
-              <strong id="lightboxSize" style="color: #fff;"></strong>
-            </div>
-          </div>
+  <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+    <div class="lightbox-content" id="lightboxContent">
+      
+      <!-- Topo com Handle e Botão Fechar (Sticky no Mobile) -->
+      <div class="lightbox-sheet-header">
+        <div class="lightbox-drag-handle" aria-hidden="true"></div>
+        <button class="lightbox-close" id="lightboxClose" aria-label="Fechar detalhes do gráfico" type="button">✕</button>
+      </div>
 
-          <a href="#checkout-offer" class="btn-cta" style="padding: 12px 20px; font-size: 0.92rem;" onclick="document.getElementById('lightboxClose').click();">
-            <span>OBTER ESTE E 300+ GRÁFICOS</span>
-          </a>
+      <!-- Conteúdo com Scroll Próprio -->
+      <div class="lightbox-sheet-body">
+        <div class="lightbox-grid-inner">
+          <div class="lightbox-media-wrap">
+            <img src="" alt="" id="lightboxImg" class="lightbox-pattern-img">
+          </div>
+          <div class="lightbox-info-pane">
+            <span class="section-tag" id="lightboxCollection" style="margin-bottom: 8px; font-size: 0.72rem;">Coleção</span>
+            <h3 id="lightboxTitle" style="font-size: 1.45rem; color: #fff; margin-bottom: 8px; font-family: var(--font-serif);">Nome</h3>
+            <p id="lightboxDesc" style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 18px; line-height: 1.45;">Descrição</p>
+            
+            <div style="background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 18px; font-size: 0.84rem; display: flex; flex-direction: column; gap: 6px;">
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--text-dim);">Pontos:</span>
+                <strong id="lightboxStitches" style="color: #fff;"></strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--text-dim);">Paleta de linhas:</span>
+                <strong id="lightboxColors" style="color: var(--gold-antique);"></strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--text-dim);">Dificuldade:</span>
+                <strong id="lightboxDiff" style="color: #4ade80;"></strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--text-dim);">Medida estimada:</span>
+                <strong id="lightboxSize" style="color: #fff;"></strong>
+              </div>
+            </div>
+
+            <a href="#checkout-offer" class="btn-cta" style="padding: 12px 20px; font-size: 0.92rem;" onclick="document.getElementById('lightboxClose').click();">
+              <span>OBTER ESTE E 300+ GRÁFICOS</span>
+            </a>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 

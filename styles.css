@@ -2611,16 +2611,7 @@ section {
     font-size: 0.8rem;
   }
 
-  /* Modal Lightbox Responsive Safeguards */
-  .lightbox-content {
-    max-width: 95vw !important;
-    max-height: 90vh !important;
-    overflow-y: auto !important;
-  }
-
-  .lightbox-content > div {
-    grid-template-columns: 1fr !important;
-  }
+  /* Modal Lightbox Responsive Safeguards handled in dedicated Bottom Sheet section */
 }
 
 /* ==========================================================================
@@ -2772,4 +2763,291 @@ section {
     padding: 20px 12px;
   }
 }
+
+/* ==========================================================================
+   GALLERY DETAILS LIGHTBOX & MOBILE BOTTOM SHEET SYSTEM
+   Desktop: Premium Framed Museum Lightbox
+   Mobile (<= 768px): Smooth Bottom Sheet / Drawer (~82-85dvh)
+   ========================================================================== */
+
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  background: rgba(5, 3, 7, 0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+  overscroll-behavior: contain;
+}
+
+.lightbox-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Lightbox Content Container (Desktop Base) */
+.lightbox-content {
+  background: linear-gradient(180deg, #180e26 0%, #0c0814 100%);
+  border: 1px solid var(--gold-antique);
+  border-radius: var(--radius-lg);
+  max-width: 760px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-museum), var(--glow-gold);
+  transform: scale(0.96) translateY(10px);
+  opacity: 0;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.lightbox-modal.is-open .lightbox-content {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Desktop Header Controls */
+.lightbox-sheet-header {
+  position: relative;
+  padding: 12px 18px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 10;
+  min-height: 40px;
+}
+
+.lightbox-drag-handle {
+  display: none; /* Only on mobile bottom sheet */
+}
+
+.lightbox-close {
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--gold-antique);
+  color: var(--gold-light);
+  transform: scale(1.05);
+}
+
+.lightbox-sheet-body {
+  width: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lightbox-grid-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+.lightbox-media-wrap {
+  aspect-ratio: 1 / 1;
+  background: #000;
+  overflow: hidden;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-pattern-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(197, 163, 90, 0.25);
+}
+
+.lightbox-info-pane {
+  padding: 24px 26px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   BOTTOM SHEET DRAWER FOR MOBILE (<= 768px)
+   Connected to bottom of screen, 82-85dvh height, 100% width, slide-up
+   ========================================================================== */
+@media (max-width: 768px) {
+  .lightbox-modal {
+    padding: 0;
+    align-items: flex-end; /* Anchored physically to bottom of screen */
+    background: rgba(4, 2, 6, 0.65);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  .lightbox-content {
+    width: 100%;
+    max-width: 100%;
+    height: 84dvh;
+    max-height: 85dvh;
+    border-radius: 24px 24px 0 0;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    border-top: 1.5px solid rgba(197, 163, 90, 0.6);
+    box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.85), 0 -2px 18px rgba(197, 163, 90, 0.2);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    bottom: 0;
+    margin: 0;
+    transform: translateY(100%); /* Start completely below viewport */
+    opacity: 1; /* Keep visible so translateY is the only motion */
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    touch-action: pan-y;
+  }
+
+  .lightbox-content.is-dragging {
+    transition: none !important;
+  }
+
+  .lightbox-modal.is-open .lightbox-content {
+    transform: translateY(0); /* Slide up cleanly from bottom */
+  }
+
+  .lightbox-modal.is-closing .lightbox-content {
+    transform: translateY(100%) !important; /* Slide down cleanly into bottom */
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  /* Sticky Header in Bottom Sheet */
+  .lightbox-sheet-header {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(180deg, rgba(24, 14, 38, 0.98) 0%, rgba(20, 11, 32, 0.94) 85%, transparent 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 10px 16px 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+    z-index: 20;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Drag Indicator Handle */
+  .lightbox-drag-handle {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(197, 163, 90, 0.5);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    cursor: grab;
+  }
+
+  .lightbox-close {
+    margin-left: auto;
+    width: 32px;
+    height: 32px;
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(197, 163, 90, 0.35);
+    color: #fff;
+  }
+
+  /* Scrollable Body inside Bottom Sheet */
+  .lightbox-sheet-body {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 18px calc(24px + env(safe-area-inset-bottom, 16px)) 18px;
+  }
+
+  .lightbox-grid-inner {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .lightbox-media-wrap {
+    width: 100%;
+    max-width: 330px;
+    max-height: 38vh;
+    margin: 0 auto;
+    background: transparent;
+    padding: 0;
+    aspect-ratio: auto;
+  }
+
+  .lightbox-pattern-img {
+    width: 100%;
+    height: auto;
+    max-height: 36vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  }
+
+  .lightbox-info-pane {
+    padding: 6px 0 16px 0;
+    text-align: center;
+    align-items: center;
+  }
+
+  .lightbox-info-pane h3 {
+    font-size: 1.35rem;
+    line-height: 1.25;
+  }
+
+  .lightbox-info-pane p {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .lightbox-info-pane .btn-cta {
+    width: 100%;
+    max-width: 340px;
+    margin: 8px auto 0 auto;
+  }
+
+  .lightbox-info-pane div[style*="border-radius: var(--radius-sm)"] {
+    width: 100%;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    text-align: left;
+  }
+}
+
 

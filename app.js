@@ -250,6 +250,7 @@ const patternData = {
 
 function initGalleryLightbox() {
   const modal = document.getElementById('lightboxModal');
+  const content = document.getElementById('lightboxContent');
   const closeBtn = document.getElementById('lightboxClose');
   const modalImg = document.getElementById('lightboxImg');
   const modalTitle = document.getElementById('lightboxTitle');
@@ -263,6 +264,77 @@ function initGalleryLightbox() {
 
   if (!modal) return;
 
+  let savedScrollY = 0;
+  let isClosing = false;
+
+  const openLightbox = (data, cardImgSrc) => {
+    if (cardImgSrc) {
+      modalImg.src = cardImgSrc;
+    } else {
+      const isSubfolder = window.location.pathname.includes('/pt-br');
+      modalImg.src = isSubfolder ? '../' + data.img : data.img;
+    }
+    modalImg.alt = data.title;
+    modalTitle.textContent = data.title;
+    modalCollection.textContent = data.collection;
+    modalStitches.textContent = data.stitches;
+    modalColors.textContent = data.colors;
+    modalDiff.textContent = data.difficulty;
+    modalSize.textContent = data.size;
+    modalDesc.textContent = data.desc;
+
+    // Reset internal scroll of bottom sheet body to top
+    const sheetBody = modal.querySelector('.lightbox-sheet-body') || content;
+    if (sheetBody) sheetBody.scrollTop = 0;
+
+    // Lock page scroll in place without jumping to top
+    savedScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+
+    // Show modal container and trigger transition on next frame
+    modal.style.display = 'flex';
+    modal.classList.remove('is-closing');
+    
+    // Force reflow
+    void modal.offsetWidth;
+    
+    requestAnimationFrame(() => {
+      modal.classList.add('is-open');
+    });
+  };
+
+  const closeLightbox = () => {
+    if (isClosing) return;
+    isClosing = true;
+
+    modal.classList.add('is-closing');
+    modal.classList.remove('is-open');
+
+    // Wait for the slide-down transition to finish (280ms)
+    setTimeout(() => {
+      modal.style.display = 'none';
+      modal.classList.remove('is-closing');
+      
+      // Restore scroll position seamlessly
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, savedScrollY);
+
+      // Reset content inline transform if any drag was applied
+      if (content) {
+        content.style.transform = '';
+        content.classList.remove('is-dragging');
+      }
+
+      isClosing = false;
+    }, 290);
+  };
+
   cards.forEach(card => {
     card.addEventListener('click', () => {
       const patternId = card.getAttribute('data-pattern');
@@ -270,41 +342,89 @@ function initGalleryLightbox() {
 
       if (data) {
         const cardImg = card.querySelector('.hoop-img') || card.querySelector('img');
-        if (cardImg && cardImg.src) {
-          modalImg.src = cardImg.src;
-        } else {
-          const isSubfolder = window.location.pathname.includes('/pt-br');
-          modalImg.src = isSubfolder ? '../' + data.img : data.img;
-        }
-        modalImg.alt = data.title;
-        modalTitle.textContent = data.title;
-        modalCollection.textContent = data.collection;
-        modalStitches.textContent = data.stitches;
-        modalColors.textContent = data.colors;
-        modalDiff.textContent = data.difficulty;
-        modalSize.textContent = data.size;
-        modalDesc.textContent = data.desc;
-
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
+        const cardImgSrc = cardImg && cardImg.src ? cardImg.src : null;
+        openLightbox(data, cardImgSrc);
       }
     });
   });
 
-  const closeModal = () => {
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-  };
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeLightbox();
+    });
+  }
 
-  closeBtn.addEventListener('click', closeModal);
+  // Backdrop click to close
   modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display === 'flex') {
-      closeModal();
+    if (e.target === modal) {
+      closeLightbox();
     }
   });
+
+  // ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeLightbox();
+    }
+  });
+
+  // Touch Drag-to-Dismiss Gesture for Bottom Sheet on Mobile
+  if (content) {
+    let startY = 0;
+    let currentY = 0;
+    let isDragging = false;
+    const sheetBody = modal.querySelector('.lightbox-sheet-body');
+
+    content.addEventListener('touchstart', (e) => {
+      if (window.innerWidth > 768) return;
+      if (e.touches.length !== 1) return;
+
+      const touchTarget = e.target;
+      const isHeader = touchTarget.closest('.lightbox-sheet-header');
+      const atTop = !sheetBody || sheetBody.scrollTop <= 2;
+
+      // Only allow drag if touching the handle/header or at top of scroll
+      if (isHeader || atTop) {
+        startY = e.touches[0].clientY;
+        currentY = startY;
+        isDragging = true;
+      }
+    }, { passive: true });
+
+    content.addEventListener('touchmove', (e) => {
+      if (!isDragging || window.innerWidth > 768) return;
+      currentY = e.touches[0].clientY;
+      const deltaY = currentY - startY;
+
+      // Only allow dragging downwards
+      if (deltaY > 0) {
+        content.classList.add('is-dragging');
+        content.style.transform = `translateY(${deltaY}px)`;
+        if (e.cancelable) e.preventDefault();
+      } else {
+        content.style.transform = '';
+      }
+    }, { passive: false });
+
+    const finishDrag = () => {
+      if (!isDragging || window.innerWidth > 768) return;
+      isDragging = false;
+      content.classList.remove('is-dragging');
+      const deltaY = currentY - startY;
+
+      if (deltaY > 100) {
+        // Dragged far enough: close bottom sheet
+        closeLightbox();
+      } else {
+        // Snap back to top
+        content.style.transform = '';
+      }
+    };
+
+    content.addEventListener('touchend', finishDrag, { passive: true });
+    content.addEventListener('touchcancel', finishDrag, { passive: true });
+  }
 }
 
 
