@@ -55,7 +55,7 @@ function initFaqAccordion() {
 /* --------------------------------------------------------------------------
    2. Lightbox Modal & Showcase Database
    -------------------------------------------------------------------------- */
-const patternData = {
+const patternDataES = {
   // Hero Designs
   'raven-cathedral': {
     title: 'Raven Cathedral Portal',
@@ -251,6 +251,202 @@ const patternData = {
   }
 };
 
+const patternDataPT = {
+  // Hero Designs
+  'raven-cathedral': {
+    title: 'Portal da Catedral dos Corvos',
+    collection: 'Arquitetura Gótica',
+    stitches: '160 × 200 pontos',
+    colors: '18 cores DMC',
+    difficulty: 'Avançado',
+    size: '29,0 × 36,3 cm (Aida 14)',
+    img: 'assets/crop_bundle_cathedral.jpg',
+    desc: 'Imponente corvo negro no vitral de um portal gótico banhado pela iluminação luar.'
+  },
+  'black-cat-moon': {
+    title: 'Gato Preto na Lua Crescente',
+    collection: 'Gatos Pretos & Familiares',
+    stitches: '120 × 120 pontos',
+    colors: '5 cores DMC',
+    difficulty: 'Iniciante / Intermediário',
+    size: '21,8 × 21,8 cm (Aida 14)',
+    img: 'assets/pattern_midnight_cat.jpg',
+    desc: 'Gato preto místico repousando em uma lua dourada cercada por espinhos simétricos e estrelas.'
+  },
+  'celestial-moth': {
+    title: 'Mariposa da Morte Celestial',
+    collection: 'Coleção Celestial',
+    stitches: '145 × 160 pontos',
+    colors: '7 cores DMC',
+    difficulty: 'Intermediário',
+    size: '26,3 × 29,0 cm (Aida 14)',
+    img: 'assets/pattern_celestial_moth.jpg',
+    desc: 'Mariposa da morte ornamental com fases lunares e rosas aveludadas em tom carmesim.'
+  },
+  'haunted-greenhouse': {
+    title: 'Estufa Vitoriana Assombrada',
+    collection: 'Botânica Sombria',
+    stitches: '160 × 160 pontos',
+    colors: '22 cores DMC',
+    difficulty: 'Avançado',
+    size: '29,0 × 29,0 cm (Aida 14)',
+    img: 'assets/pattern_haunted_greenhouse.jpg',
+    desc: 'Antiga estufa gótica ao anoitecer, com espécies botânicas raras, beladonas e luzes misteriosas.'
+  },
+  'dark-rose-moon': {
+    title: 'Lua de Rosas Negras',
+    collection: 'Botânica Sombria',
+    stitches: '135 × 135 pontos',
+    colors: '14 cores DMC',
+    difficulty: 'Intermediário',
+    size: '24,5 × 24,5 cm (Aida 14)',
+    img: 'assets/crop_dark_gothic.jpg',
+    desc: 'Rosas de veludo negro e folhas de hélice escura entrelaçadas em uma serena lua crescente.'
+  },
+  'witch-apothecary': {
+    title: 'Prateleira de Alquimia & Poções',
+    collection: 'Objetos Místicos',
+    stitches: '135 × 135 pontos',
+    colors: '17 cores DMC',
+    difficulty: 'Intermediário',
+    size: '24,5 × 24,5 cm (Aida 14)',
+    img: 'assets/pattern_witch_potion.jpg',
+    desc: 'Frascos arcanos, elixires, grimórios antigos e chaves místicas dispostos em prateleira rústica.'
+  },
+  'gothic-window': {
+    title: 'Rosácea de Vitrais Góticos',
+    collection: 'Arquitetura Gótica',
+    stitches: '145 × 195 pontos',
+    colors: '20 cores DMC',
+    difficulty: 'Avançado',
+    size: '26,3 × 35,3 cm (Aida 14)',
+    img: 'assets/pattern_gothic_cathedral.jpg',
+    desc: 'Rosácea gótica detalhada com vitrais em tons safira e ametista circundada por detalhes dourados.'
+  },
+  'mushroom-garden': {
+    title: 'Jardim Noturno de Cogumelos',
+    collection: 'Botânica Sombria',
+    stitches: '130 × 130 pontos',
+    colors: '12 cores DMC',
+    difficulty: 'Intermediário',
+    size: '23,5 × 23,5 cm (Aida 14)',
+    img: 'assets/crop_bundle_moth.jpg',
+    desc: 'Círculo misterioso de cogumelos silvestres sob o clarão prateado da lua cheia.'
+  },
+
+  // Main Gallery Designs
+  'snake-moon': {
+    title: 'Serpente & Lua Arcana',
+    collection: 'Coleção Celestial',
+    stitches: '130 × 130 pontos',
+    colors: '6 cores DMC',
+    difficulty: 'Intermediário',
+    size: '23,5 × 23,5 cm (Aida 14)',
+    img: 'imgs/colecao1.png',
+    desc: 'Serpente mística enroscada na lua crescente, cercada por constelações e sutis detalhes arcanos.'
+  },
+  'triple-candle': {
+    title: 'Altar das Três Velas',
+    collection: 'Objetos Místicos',
+    stitches: '125 × 125 pontos',
+    colors: '8 cores DMC',
+    difficulty: 'Iniciante / Intermediário',
+    size: '22,6 × 22,6 cm (Aida 14)',
+    img: 'imgs/colecao2.png',
+    desc: 'Velas ritualísticas derretendo sobre um candelabro gótico de ferro forjado, evocando um ambiente misterioso.'
+  },
+  'raven-key': {
+    title: 'Corvo, Chave & Caveira',
+    collection: 'Objetos Góticos',
+    stitches: '140 × 180 pontos',
+    colors: '16 cores DMC',
+    difficulty: 'Avançado',
+    size: '25,4 × 32,6 cm (Aida 14)',
+    img: 'imgs/colecao3.png',
+    desc: 'Composição gótica ornamentada com crânio de corvo em detalhes filigranados e a chave antiga da bóveda.'
+  },
+  'gothic-mirror': {
+    title: 'Espelho de Obsidiana',
+    collection: 'Objetos Místicos',
+    stitches: '140 × 170 pontos',
+    colors: '15 cores DMC',
+    difficulty: 'Intermediário',
+    size: '25,4 × 30,8 cm (Aida 14)',
+    img: 'imgs/colecao4.png',
+    desc: 'Espelho gótico emoldurado por rosas negras entalhadas e ornamentos arabescos de inspiração vitoriana.'
+  },
+  'moon-phases': {
+    title: 'Fases da Lua Botânicas',
+    collection: 'Coleção Celestial',
+    stitches: '140 × 140 pontos',
+    colors: '10 cores DMC',
+    difficulty: 'Intermediário',
+    size: '25,4 × 25,4 cm (Aida 14)',
+    img: 'imgs/colecao5.png',
+    desc: 'As fases lunares dispostas em harmonia dentro de um delicado aro botânico de folhas e ramas sombrias.'
+  },
+  'black-cat-apothecary': {
+    title: 'Gato Preto no Boticário',
+    collection: 'Gatos Pretos & Familiares',
+    stitches: '135 × 135 pontos',
+    colors: '14 cores DMC',
+    difficulty: 'Intermediário',
+    size: '24,5 × 24,5 cm (Aida 14)',
+    img: 'imgs/colecao6.png',
+    desc: 'Um gato preto entre frascos, ervas e velas, envolvido pela atmosfera misteriosa de um antigo boticário.'
+  },
+  'haunted-greenhouse': {
+    title: 'Estufa Vitoriana Assombrada',
+    collection: 'Botânica Sombria',
+    stitches: '160 × 160 pontos',
+    colors: '22 cores DMC',
+    difficulty: 'Avançado',
+    size: '29,0 × 29,0 cm (Aida 14)',
+    img: 'imgs/colecao7.png',
+    desc: 'Estufa gótica ao anoitecer com plantas exóticas, beladonas e iluminação mística.'
+  },
+  'bat-cathedral': {
+    title: 'Morcegos na Torre da Catedral',
+    collection: 'Arquitetura Gótica',
+    stitches: '135 × 180 pontos',
+    colors: '12 cores DMC',
+    difficulty: 'Intermediário',
+    size: '24,5 × 32,6 cm (Aida 14)',
+    img: 'imgs/colecao8.png',
+    desc: 'Campanario gótico ao crepúsculo com revoada de morcegos sob a luz de uma intensa lua avermelhada.'
+  },
+  'poison-bottle': {
+    title: 'Belladonna Venenosa',
+    collection: 'Botânica Sombria',
+    stitches: '130 × 130 pontos',
+    colors: '15 cores DMC',
+    difficulty: 'Intermediário',
+    size: '23,5 × 23,5 cm (Aida 14)',
+    img: 'imgs/colecao9.png',
+    desc: 'Frasco de veneno antigo envolto por ramos e bagas sombrias de beladona em estilo vitoriano.'
+  },
+  'crescent-familiar': {
+    title: 'Familiar sob a Lua Crescente',
+    collection: 'Coleção Celestial',
+    stitches: '145 × 195 pontos',
+    colors: '20 cores DMC',
+    difficulty: 'Avançado',
+    size: '26,3 × 35,3 cm (Aida 14)',
+    img: 'imgs/colecao10.png',
+    desc: 'Composição gótica de inspiração vitoriana, com lua crescente, elementos celestiais e uma atmosfera profundamente mística.'
+  },
+  'mini-sheet': {
+    title: 'Prancha com 50 Mini Gráficos Místicos',
+    collection: 'Coleção Mini',
+    stitches: '30×30 a 40×40 pontos cada',
+    colors: '4 a 6 cores DMC',
+    difficulty: 'Iniciante',
+    size: '6×6 a 8×8 cm cada',
+    img: 'assets/crop_mini_sheet.jpg',
+    desc: 'Prancha com 50 miniativos góticos: morcegos, pocões, lunas, velas e caveiras.'
+  }
+};
+
 function initGalleryLightbox() {
   const modal = document.getElementById('lightboxModal');
   const content = document.getElementById('lightboxContent');
@@ -336,7 +532,9 @@ function initGalleryLightbox() {
   cards.forEach(card => {
     card.addEventListener('click', () => {
       const patternId = card.getAttribute('data-pattern');
-      const data = patternData[patternId] || patternData['black-cat-moon'];
+      const isPtBr = window.location.pathname.includes('/pt-br');
+      const database = isPtBr ? patternDataPT : patternDataES;
+      const data = database[patternId] || database['black-cat-moon'];
 
       if (data) {
         const cardImg = card.querySelector('.hoop-img') || card.querySelector('img');
@@ -345,7 +543,6 @@ function initGalleryLightbox() {
       }
     });
   });
-
   if (closeBtn) {
     closeBtn.addEventListener('click', (e) => {
       e.preventDefault();
