@@ -267,7 +267,6 @@ function initGalleryLightbox() {
 
   if (!modal) return;
 
-  let savedScrollY = 0;
   let isClosing = false;
 
   const openLightbox = (data, cardImgSrc) => {
@@ -290,12 +289,9 @@ function initGalleryLightbox() {
     const sheetBody = modal.querySelector('.lightbox-sheet-body') || content;
     if (sheetBody) sheetBody.scrollTop = 0;
 
-    // Lock page scroll in place without jumping to top
-    savedScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-    document.body.style.top = `-${savedScrollY}px`;
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
+    // Lock page background scrolling without touching page position or scrollY
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
     document.body.classList.add('has-modal-open');
 
     // Show modal container and trigger transition on next frame
@@ -314,6 +310,12 @@ function initGalleryLightbox() {
     if (isClosing) return;
     isClosing = true;
 
+    // Remove dragging state so CSS slide-down animation takes effect smoothly
+    if (content) {
+      content.classList.remove('is-dragging');
+      content.style.transform = '';
+    }
+
     modal.classList.add('is-closing');
     modal.classList.remove('is-open');
 
@@ -322,19 +324,10 @@ function initGalleryLightbox() {
       modal.style.display = 'none';
       modal.classList.remove('is-closing');
       
-      // Restore scroll position seamlessly
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
+      // Restore background page scrollability seamlessly without jumping scroll position
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
       document.body.classList.remove('has-modal-open');
-      window.scrollTo(0, savedScrollY);
-
-      // Reset content inline transform if any drag was applied
-      if (content) {
-        content.style.transform = '';
-        content.classList.remove('is-dragging');
-      }
 
       isClosing = false;
     }, 290);
@@ -355,6 +348,7 @@ function initGalleryLightbox() {
 
   if (closeBtn) {
     closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
       closeLightbox();
     });
@@ -363,9 +357,18 @@ function initGalleryLightbox() {
   // Backdrop click to close
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
+      e.preventDefault();
+      e.stopPropagation();
       closeLightbox();
     }
   });
+
+  // Prevent pull-to-refresh / background scrolling on backdrop touch
+  modal.addEventListener('touchmove', (e) => {
+    if (e.target === modal) {
+      if (e.cancelable) e.preventDefault();
+    }
+  }, { passive: false });
 
   // ESC key
   document.addEventListener('keydown', (e) => {
@@ -407,22 +410,20 @@ function initGalleryLightbox() {
         content.classList.add('is-dragging');
         content.style.transform = `translateY(${deltaY}px)`;
         if (e.cancelable) e.preventDefault();
-      } else {
-        content.style.transform = '';
       }
     }, { passive: false });
 
     const finishDrag = () => {
       if (!isDragging || window.innerWidth > 768) return;
       isDragging = false;
-      content.classList.remove('is-dragging');
       const deltaY = currentY - startY;
 
-      if (deltaY > 100) {
-        // Dragged far enough: close bottom sheet
+      if (deltaY > 80) {
+        // Dragged far enough: close bottom sheet smoothly
         closeLightbox();
       } else {
         // Snap back to top
+        content.classList.remove('is-dragging');
         content.style.transform = '';
       }
     };
