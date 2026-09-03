@@ -1,0 +1,948 @@
+/* ==========================================================================
+   DO PONTO CRUZ À RENDA™ — UPSELL DESIGN SYSTEM (DOSSIÊ FINANCEIRO & OPORTUNIDADE)
+   Black + Dark Gold + Ivory + Emerald Accents · High Contrast · Data-Driven
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. TOPO DA PÁGINA / BARRA DE GARANTIA PÓS-COMPRA
+   -------------------------------------------------------------------------- */
+.upsell-top-banner {
+  background: #08060B;
+  border-bottom: 1px solid rgba(197, 163, 90, 0.35);
+  padding: 11px 16px;
+  text-align: center;
+  position: relative;
+  z-index: 50;
+}
+
+.upsell-top-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gold-light, #F7E6A7);
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.upsell-top-subtext {
+  color: var(--ivory-warm, #E9DFC8);
+  font-size: 0.78rem;
+  margin-top: 2px;
+  opacity: 0.85;
+}
+
+/* --------------------------------------------------------------------------
+   2. HERO UPSELL (FINANCEIRO & PROVOCATIVO)
+   -------------------------------------------------------------------------- */
+.upsell-hero {
+  padding: 45px 0 50px 0;
+  position: relative;
+  text-align: center;
+  background: radial-gradient(circle at 50% 15%, rgba(42, 12, 25, 0.35) 0%, #08060B 75%);
+}
+
+.upsell-hero .container {
+  max-width: 960px;
+}
+
+.upsell-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: rgba(197, 163, 90, 0.1);
+  border: 1px solid rgba(197, 163, 90, 0.4);
+  border-radius: var(--radius-full, 9999px);
+  color: var(--gold-light, #F7E6A7);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.upsell-hero-headline {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: clamp(1.85rem, 4.4vw, 2.9rem);
+  font-weight: 900;
+  line-height: 1.2;
+  color: #FFFFFF;
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+.upsell-hero-subheadline {
+  font-size: clamp(1rem, 2.1vw, 1.18rem);
+  color: var(--ivory-warm, #E9DFC8);
+  line-height: 1.55;
+  max-width: 760px;
+  margin: 0 auto 28px auto;
+}
+
+/* Hero Big Numbers Display */
+.hero-numbers-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 820px;
+  margin: 0 auto 20px auto;
+}
+
+@media (max-width: 640px) {
+  .hero-numbers-strip {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.hero-number-card {
+  background: rgba(15, 12, 20, 0.95);
+  border: 1px solid rgba(197, 163, 90, 0.3);
+  border-radius: var(--radius-md, 14px);
+  padding: 20px 14px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+}
+
+.hero-number-val {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: clamp(1.85rem, 3.8vw, 2.6rem);
+  font-weight: 900;
+  line-height: 1.1;
+  color: #4ade80;
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.25);
+}
+
+.hero-number-lbl {
+  font-size: 0.78rem;
+  color: var(--text-dim, #94A3B8);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+.hero-disclaimer-note {
+  font-size: 0.8rem;
+  color: var(--text-dim, #94A3B8);
+  max-width: 700px;
+  margin: 14px auto 0 auto;
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   3. SEÇÃO DE MATEMÁTICA / CENÁRIOS DE FATURAMENTO
+   -------------------------------------------------------------------------- */
+.math-section {
+  padding: 55px 0;
+  background: #0B0810;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.math-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 30px;
+}
+
+@media (max-width: 860px) {
+  .math-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.math-scenario-card {
+  background: linear-gradient(180deg, rgba(25, 20, 32, 0.95) 0%, rgba(12, 10, 16, 0.98) 100%);
+  border: 1px solid rgba(197, 163, 90, 0.35);
+  border-radius: var(--radius-md, 14px);
+  padding: 24px 20px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+.math-scenario-header {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #4ade80;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.math-formula {
+  font-size: 1.02rem;
+  color: var(--ivory-warm, #E9DFC8);
+  margin: 12px 0;
+  font-weight: 600;
+}
+
+.math-equals {
+  color: var(--gold-antique, #C5A35A);
+  font-size: 1.2rem;
+  margin: 6px 0;
+}
+
+.math-total-line {
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm, 8px);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  margin-top: 10px;
+}
+
+.math-disclaimer-box {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px dashed rgba(197, 163, 90, 0.3);
+  border-radius: var(--radius-sm, 8px);
+  padding: 12px 18px;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-dim, #94A3B8);
+  max-width: 820px;
+  margin: 24px auto 0 auto;
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   4. SEÇÃO — OLHE O MERCADO (VALORES REAIS NO BRASIL)
+   -------------------------------------------------------------------------- */
+.market-section {
+  padding: 60px 0;
+  background: #08060B;
+}
+
+.market-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin: 30px 0 20px 0;
+}
+
+.market-price-card {
+  background: linear-gradient(180deg, rgba(20, 16, 26, 0.9) 0%, rgba(10, 8, 14, 0.98) 100%);
+  border: 1px solid rgba(197, 163, 90, 0.25);
+  border-left: 4px solid var(--gold-antique, #C5A35A);
+  border-radius: var(--radius-sm, 8px);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.market-price-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(197, 163, 90, 0.5);
+}
+
+.market-price-val {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--gold-light, #F7E6A7);
+  line-height: 1.1;
+}
+
+.market-price-desc {
+  font-size: 0.88rem;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+.market-price-tag {
+  font-size: 0.74rem;
+  color: var(--text-dim, #94A3B8);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --------------------------------------------------------------------------
+   5. ESCADA DE PRODUTOS FÍSICOS
+   -------------------------------------------------------------------------- */
+.product-ladder-section {
+  padding: 60px 0;
+  background: linear-gradient(180deg, #0B0810 0%, #08060B 100%);
+}
+
+.ladder-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 30px;
+}
+
+@media (max-width: 920px) {
+  .ladder-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .ladder-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ladder-card {
+  background: rgba(18, 14, 24, 0.9);
+  border: 1px solid rgba(197, 163, 90, 0.25);
+  border-radius: var(--radius-md, 14px);
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ladder-tier {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--gold-antique, #C5A35A);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.ladder-price {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ladder-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted, #CBD5E1);
+}
+
+.ladder-list li::before {
+  content: '• ';
+  color: var(--gold-antique, #C5A35A);
+  font-weight: bold;
+}
+
+/* --------------------------------------------------------------------------
+   6. CONEXÃO COM O COFRE SOMBRIO & FLUXO
+   -------------------------------------------------------------------------- */
+.bridge-ideas-section {
+  padding: 55px 0;
+  background: #08060B;
+  text-align: center;
+}
+
+.ideas-bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 720px;
+  margin: 24px auto;
+  text-align: left;
+}
+
+.ideas-bullet-list li {
+  font-size: 0.98rem;
+  color: var(--ivory-warm, #E9DFC8);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.45;
+  background: rgba(20, 16, 26, 0.6);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm, 8px);
+  border-left: 3px solid var(--gold-antique, #C5A35A);
+}
+
+.ideas-bullet-list li i {
+  color: var(--gold-antique, #C5A35A);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.upsell-flow-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 28px auto 0 auto;
+  max-width: 960px;
+}
+
+.upsell-flow-node {
+  background: rgba(25, 20, 32, 0.9);
+  border: 1px solid rgba(197, 163, 90, 0.35);
+  padding: 8px 14px;
+  border-radius: var(--radius-sm, 8px);
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold-light, #F7E6A7);
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.upsell-flow-arrow {
+  color: var(--gold-antique, #C5A35A);
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 640px) {
+  .upsell-flow-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .upsell-flow-arrow {
+    transform: rotate(90deg);
+    margin: 1px 0;
+  }
+}
+
+.upsell-mockup-frame {
+  margin: 25px auto 10px auto;
+  border-radius: var(--radius-md, 14px);
+  overflow: hidden;
+  border: 1px solid rgba(197, 163, 90, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.85);
+  position: relative;
+  background: #120A18;
+  max-width: 820px;
+}
+
+.upsell-mockup-frame img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .upsell-mockup-frame img {
+    max-height: 230px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. FRASE DE IMPACTO (POSICIONAMENTO EMOCIONAL)
+   -------------------------------------------------------------------------- */
+.positioning-impact-section {
+  padding: 50px 0;
+  background: linear-gradient(180deg, #08060B 0%, #120A18 50%, #08060B 100%);
+  text-align: center;
+  border-top: 1px solid rgba(197, 163, 90, 0.2);
+  border-bottom: 1px solid rgba(197, 163, 90, 0.2);
+}
+
+.positioning-headline {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 14px;
+}
+
+.positioning-tags-wrap {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 780px;
+  margin: 16px auto;
+}
+
+.positioning-tag {
+  background: rgba(197, 163, 90, 0.12);
+  border: 1px solid rgba(197, 163, 90, 0.4);
+  color: var(--gold-light, #F7E6A7);
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 6px 16px;
+  border-radius: var(--radius-full, 9999px);
+  text-transform: uppercase;
+}
+
+.positioning-quote {
+  font-size: 1.05rem;
+  color: var(--ivory-warm, #E9DFC8);
+  max-width: 640px;
+  margin: 16px auto 0 auto;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   8. O PROBLEMA REAL (TRANSFORMAR EM PRODUTO)
+   -------------------------------------------------------------------------- */
+.problem-grid-extended {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.problem-card-compact {
+  background: rgba(20, 16, 26, 0.8);
+  border: 1px solid rgba(197, 163, 90, 0.2);
+  border-left: 3px solid var(--gold-antique, #C5A35A);
+  padding: 12px 14px;
+  border-radius: var(--radius-sm, 8px);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.problem-card-compact i {
+  color: var(--gold-antique, #C5A35A);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   9. REPOSICIONAMENTO DO PRODUTO (R$47)
+   -------------------------------------------------------------------------- */
+.upsell-product-box {
+  background: linear-gradient(180deg, rgba(35, 20, 42, 0.9) 0%, rgba(15, 12, 20, 0.98) 100%);
+  border: 2px solid var(--gold-antique, #C5A35A);
+  border-radius: var(--radius-lg, 18px);
+  padding: 28px 22px;
+  margin: 28px auto 0 auto;
+  max-width: 720px;
+  text-align: center;
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.8), 0 0 25px rgba(197, 163, 90, 0.2);
+}
+
+.upsell-product-title {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: clamp(1.45rem, 3.2vw, 2.15rem);
+  color: var(--gold-light, #F7E6A7);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.upsell-product-subtitle {
+  font-size: 0.95rem;
+  color: var(--ivory-warm, #E9DFC8);
+  margin-bottom: 16px;
+  line-height: 1.45;
+}
+
+.upsell-price-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.upsell-price-val {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: clamp(2.4rem, 5.5vw, 3.4rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1;
+}
+
+.upsell-price-period {
+  display: inline-block;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #4ade80;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: var(--radius-full, 9999px);
+  text-transform: uppercase;
+}
+
+.btn-upsell-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 500px;
+  padding: 16px 26px;
+  background: var(--gold-gradient, linear-gradient(135deg, #F7E6A7 0%, #C5A35A 50%, #8F7540 100%));
+  color: #09070D !important;
+  font-family: var(--font-sans, 'Outfit', sans-serif);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: var(--radius-full, 9999px);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(197, 163, 90, 0.4);
+  transition: var(--transition, all 0.28s ease);
+}
+
+.btn-upsell-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(197, 163, 90, 0.55);
+  color: #000000 !important;
+}
+
+.upsell-microcopy {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--text-dim, #94A3B8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   10. OS 8 MÓDULOS REORDENADOS
+   -------------------------------------------------------------------------- */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+}
+
+@media (max-width: 768px) {
+  .modules-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.module-card {
+  background: rgba(20, 16, 26, 0.9);
+  border: 1px solid rgba(197, 163, 90, 0.25);
+  border-radius: var(--radius-md, 14px);
+  padding: 16px 18px;
+  position: relative;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.module-card:hover {
+  border-color: rgba(197, 163, 90, 0.5);
+  transform: translateY(-2px);
+}
+
+.module-badge {
+  display: inline-block;
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--gold-antique, #C5A35A);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.module-title {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.module-topics {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.module-topics li {
+  font-size: 0.85rem;
+  color: var(--text-muted, #CBD5E1);
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  line-height: 1.35;
+}
+
+.module-topics li::before {
+  content: '✦';
+  color: var(--gold-antique, #C5A35A);
+  font-size: 0.65rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   11. FERRAMENTAS PRÁTICAS
+   -------------------------------------------------------------------------- */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.tool-item-card {
+  background: rgba(18, 14, 24, 0.9);
+  border: 1px solid rgba(197, 163, 90, 0.25);
+  border-radius: var(--radius-md, 14px);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tool-item-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tool-icon-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm, 8px);
+  background: rgba(197, 163, 90, 0.15);
+  border: 1px solid rgba(197, 163, 90, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light, #F7E6A7);
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.tool-item-name {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.25;
+}
+
+.tool-item-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted, #CBD5E1);
+  line-height: 1.35;
+}
+
+/* --------------------------------------------------------------------------
+   12. EXEMPLO DE CATÁLOGO VISUAL
+   -------------------------------------------------------------------------- */
+.catalog-example-section {
+  padding: 55px 0;
+  background: #0B0810;
+}
+
+.catalog-example-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 28px;
+}
+
+@media (max-width: 920px) {
+  .catalog-example-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .catalog-example-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.catalog-card {
+  background: rgba(18, 14, 24, 0.95);
+  border: 1px solid rgba(197, 163, 90, 0.3);
+  border-radius: var(--radius-md, 14px);
+  padding: 18px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.catalog-card-title {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--gold-light, #F7E6A7);
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.catalog-card-price {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #4ade80;
+  margin-top: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   13. STACK DA OFERTA CENTRAL (R$47)
+   -------------------------------------------------------------------------- */
+.upsell-stack-card {
+  background: linear-gradient(180deg, rgba(35, 18, 42, 0.9) 0%, rgba(12, 10, 16, 0.98) 100%);
+  border: 2px solid var(--gold-antique, #C5A35A);
+  border-radius: var(--radius-lg, 18px);
+  padding: 30px 24px;
+  max-width: 660px;
+  margin: 25px auto 0 auto;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(197, 163, 90, 0.25);
+  position: relative;
+}
+
+.stack-feature-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 14px;
+  text-align: left;
+  max-width: 520px;
+  margin: 18px auto;
+}
+
+@media (max-width: 560px) {
+  .stack-feature-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stack-feature-list li {
+  font-size: 0.88rem;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stack-feature-list li i {
+  color: #4ade80;
+  font-size: 0.85rem;
+}
+
+/* --------------------------------------------------------------------------
+   14. CTA FINAL COM LINK DE RECUSA
+   -------------------------------------------------------------------------- */
+.upsell-final-section {
+  padding: 50px 0 65px 0;
+  text-align: center;
+  background: radial-gradient(circle at 50% 50%, rgba(42, 12, 25, 0.4) 0%, #08060B 75%);
+}
+
+.btn-decline-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--text-dim, #94A3B8);
+  font-size: 0.86rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  line-height: 1.4;
+}
+
+.btn-decline-link:hover {
+  color: var(--ivory-warm, #E9DFC8);
+}
+
+/* --------------------------------------------------------------------------
+   15. STICKY MOBILE CTA BAR
+   -------------------------------------------------------------------------- */
+.upsell-sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(12, 10, 16, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(197, 163, 90, 0.4);
+  padding: 10px 16px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.7);
+  transform: translateY(120%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.upsell-sticky-bar.visible {
+  transform: translateY(0);
+}
+
+.upsell-sticky-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.upsell-sticky-name {
+  font-family: var(--font-serif, 'Cinzel', serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold-light, #F7E6A7);
+  line-height: 1.2;
+}
+
+.upsell-sticky-price {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.2;
+}
+
+.upsell-sticky-btn {
+  padding: 10px 18px;
+  font-size: 0.84rem;
+  white-space: nowrap;
+  border-radius: var(--radius-full, 9999px);
+  background: var(--gold-gradient, linear-gradient(135deg, #F7E6A7 0%, #C5A35A 50%, #8F7540 100%));
+  color: #09070D !important;
+  font-weight: 800;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 15px rgba(197, 163, 90, 0.3);
+}
+
+@media (min-width: 860px) {
+  .upsell-sticky-bar {
+    display: none !important;
+  }
+}

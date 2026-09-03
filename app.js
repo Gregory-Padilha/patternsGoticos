@@ -20,6 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 6. Automatic Country + Currency Localization System
   initLocalizationSystem();
+
+  // 7. Toggle de 'Ver mais inspirações'
+  initMoreProjectsToggle();
+
+  // 8. Funnel Tracking & Dynamic Checkout Forwarding (PT-BR)
+  if (window.location.pathname.includes('/pt-br')) {
+    initFunnelTrackingPTBR();
+  }
 });
 
 /* --------------------------------------------------------------------------
@@ -664,8 +672,10 @@ function initMobileStickyCta() {
   const stickyBar = document.getElementById('mobileStickyCta');
   if (!stickyBar) return;
 
-  const heroSection = document.getElementById('hero');
+  const isPtBr = window.location.pathname.includes('/pt-br');
+  const priceTriggerSection = isPtBr ? document.getElementById('faca-a-conta') : document.getElementById('hero');
   const checkoutSection = document.getElementById('checkout-offer');
+  const finalCtaSection = document.getElementById('cta-final');
 
   const onScroll = () => {
     if (window.innerWidth > 768) {
@@ -673,15 +683,23 @@ function initMobileStickyCta() {
       return;
     }
 
-    const heroBottom = heroSection ? heroSection.getBoundingClientRect().bottom : 300;
+    // No PT-BR: exibe somente após a primeira revelação de preço (#faca-a-conta)
+    let hasPassedTrigger = false;
+    if (priceTriggerSection) {
+      const triggerRect = priceTriggerSection.getBoundingClientRect();
+      hasPassedTrigger = triggerRect.top < 100;
+    } else {
+      hasPassedTrigger = window.scrollY > 450;
+    }
+
     const checkoutRect = checkoutSection ? checkoutSection.getBoundingClientRect() : null;
+    const finalRect = finalCtaSection ? finalCtaSection.getBoundingClientRect() : null;
 
-    // Show sticky bar once user has scrolled past hero top action card
-    const hasPassedHero = heroBottom < 100;
-    // Hide when user reaches checkout section directly
+    // Oculta quando o usuário está sobre o stack principal ou CTA final para não sobrepor
     const isAtCheckout = checkoutRect ? (checkoutRect.top < window.innerHeight && checkoutRect.bottom > 0) : false;
+    const isAtFinal = finalRect ? (finalRect.top < window.innerHeight && finalRect.bottom > 0) : false;
 
-    if (hasPassedHero && !isAtCheckout) {
+    if (hasPassedTrigger && !isAtCheckout && !isAtFinal) {
       stickyBar.classList.add('is-visible');
     } else {
       stickyBar.classList.remove('is-visible');
@@ -691,6 +709,41 @@ function initMobileStickyCta() {
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
+}
+
+/* --------------------------------------------------------------------------
+   4.5. Toggle de 'Ver Mais Inspirações +' (Galeria de Projetos Finalizados)
+   -------------------------------------------------------------------------- */
+function initMoreProjectsToggle() {
+  const toggleBtn = document.getElementById('toggleMoreProjectsBtn');
+  const extraProjects = document.querySelectorAll('.finished-project-extra');
+  if (!toggleBtn || !extraProjects.length) return;
+
+  toggleBtn.addEventListener('click', () => {
+    const isExpanded = toggleBtn.getAttribute('data-expanded') === 'true';
+
+    extraProjects.forEach(card => {
+      if (!isExpanded) {
+        card.style.display = 'block';
+        requestAnimationFrame(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        });
+      } else {
+        card.style.display = 'none';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(10px)';
+      }
+    });
+
+    if (!isExpanded) {
+      toggleBtn.setAttribute('data-expanded', 'true');
+      toggleBtn.innerHTML = 'VER MENOS INSPIRAÇÕES −';
+    } else {
+      toggleBtn.setAttribute('data-expanded', 'false');
+      toggleBtn.innerHTML = 'VER MAIS INSPIRAÇÕES +';
+    }
+  });
 }
 
 /* --------------------------------------------------------------------------
@@ -1210,3 +1263,109 @@ async function initLocalizationSystem() {
 
   setupMarketUIEvents();
 }
+
+/* --------------------------------------------------------------------------
+   7. Funnel Tracking & Dynamic Checkout Forwarding (PT-BR)
+   -------------------------------------------------------------------------- */
+function initFunnelTrackingPTBR() {
+  // 1. Evento LPView
+  if (typeof fbq === 'function') {
+    fbq('trackCustom', 'LPView', {
+      page: 'pt-br/index.html',
+      product: 'O Cofre Sombrio',
+      value: 29.90,
+      currency: 'BRL'
+    });
+  }
+
+  // 2. Propagação de parâmetros de URL (UTMs, fbclid, etc.) para todos os botões de checkout
+  const currentParams = new URLSearchParams(window.location.search);
+  const queryString = currentParams.toString();
+  const baseCheckoutUrl = 'https://pay.cakto.com.br/e4th3s6_1070128';
+
+  const checkoutButtons = document.querySelectorAll('.js-checkout-btn, #mainCheckoutBtn, #heroCtaBtn, #facaContaCtaBtn, #galleryCtaBtn, #stickyCtaBtn, #finalCtaBtn, #lightboxCtaBtn');
+  checkoutButtons.forEach(btn => {
+    const originalHref = btn.getAttribute('data-checkout-url') || btn.getAttribute('href') || baseCheckoutUrl;
+    
+    // Se for link de checkout e não âncora local
+    if (originalHref && !originalHref.startsWith('#')) {
+      if (queryString) {
+        const separator = originalHref.includes('?') ? '&' : '?';
+        btn.href = `${originalHref}${separator}${queryString}`;
+      } else {
+        btn.href = originalHref;
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      if (typeof fbq === 'function') {
+        fbq('trackCustom', 'CheckoutClick', {
+          button_id: btn.id || 'checkout-btn',
+          product: 'O Cofre Sombrio',
+          value: 29.90,
+          currency: 'BRL'
+        });
+      }
+    });
+  });
+
+  // 3. Evento HeroCTA
+  const heroCta = document.getElementById('heroCtaBtn');
+  if (heroCta) {
+    heroCta.addEventListener('click', () => {
+      if (typeof fbq === 'function') {
+        fbq('trackCustom', 'HeroCTA', { product: 'O Cofre Sombrio', value: 29.90, currency: 'BRL' });
+      }
+    });
+  }
+
+  // 4. Evento GalleryCTA
+  const galleryCta = document.getElementById('galleryCtaBtn');
+  if (galleryCta) {
+    galleryCta.addEventListener('click', () => {
+      if (typeof fbq === 'function') {
+        fbq('trackCustom', 'GalleryCTA', { product: 'O Cofre Sombrio', value: 29.90, currency: 'BRL' });
+      }
+    });
+  }
+
+  const lightboxCta = document.getElementById('lightboxCtaBtn');
+  if (lightboxCta) {
+    lightboxCta.addEventListener('click', () => {
+      if (typeof fbq === 'function') {
+        fbq('trackCustom', 'GalleryCTA', { source: 'lightbox', product: 'O Cofre Sombrio', value: 29.90, currency: 'BRL' });
+      }
+    });
+  }
+
+  // 5. Viewport Observers: GalleryView & PricingView
+  if ('IntersectionObserver' in window) {
+    let galleryViewFired = false;
+    let pricingViewFired = false;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target.id === 'galeria' && !galleryViewFired) {
+            galleryViewFired = true;
+            if (typeof fbq === 'function') {
+              fbq('trackCustom', 'GalleryView', { product: 'O Cofre Sombrio' });
+            }
+          }
+          if (entry.target.id === 'checkout-offer' && !pricingViewFired) {
+            pricingViewFired = true;
+            if (typeof fbq === 'function') {
+              fbq('trackCustom', 'PricingView', { product: 'O Cofre Sombrio', value: 29.90, currency: 'BRL' });
+            }
+          }
+        }
+      });
+    }, { threshold: 0.25 });
+
+    const gallerySection = document.getElementById('galeria');
+    const pricingSection = document.getElementById('checkout-offer');
+    if (gallerySection) observer.observe(gallerySection);
+    if (pricingSection) observer.observe(pricingSection);
+  }
+}
+
